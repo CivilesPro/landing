@@ -7,33 +7,28 @@ import {
   useTransform,
 } from "framer-motion";
 
-const Motion = motion;
-
 const PRIMARY = "#055a27";
 const ROLES = ["Ingeniero", "Arquitecto", "Maestro de obra"];
 
+/** Imágenes en public/img/*.png (sin slash inicial; se concatena BASE_URL) */
 const CARDS = [
-  {
-    key: "cubiertas",
-    title: "Cubiertas (fibrocemento, UPVC, sándwich, standing, zinc)",
-    img: "img/landing/cubiertas.png",
-  },
-  { key: "concreto", title: "Concreto", img: "img/landing/concreto.png" },
-  { key: "ciclopeo", title: "Ciclópeo", img: "img/landing/ciclopeo.png" },
-  { key: "pavimento", title: "Pavimento rígido", img: "img/landing/pavimento.png" },
-  { key: "muros", title: "Mampostería estructural y Muros", img: "img/landing/muros.png" },
-  { key: "drywall", title: "Drywall y Cielo raso", img: "img/landing/drywall.png" },
-  {
-    key: "pisos",
-    title: "Pisos: porcelanato, cerámica, pulidos",
-    img: "img/landing/pisos.png",
-  },
+  { key: "fibrocemento",           title: "Fibrocemento (Cubiertas)",            img: "img/fibrocemento.png" },
+  { key: "ceramica",               title: "Cerámica (Pisos)",                    img: "img/ceramica.png" },
+  { key: "bordillos",              title: "Bordillos",                           img: "img/bordillos.png" },
+  { key: "cielorazoendrywall",     title: "Cielo raso y Drywall",                img: "img/cielorazoendrywall.png" },
+  { key: "marmol",                 title: "Mármol (Pisos)",                      img: "img/marmol.png" },
+  { key: "yeso",                   title: "Yeso (Acabados)",                     img: "img/yeso.png" },
+  { key: "steeldeck",              title: "SteelDeck / Losacero",                img: "img/steeldeck.png" },
+  { key: "pintura",                title: "Pintura (Acabados)",                  img: "img/pintura.png" },
+  { key: "granito",                title: "Granito (Pisos)",                     img: "img/granito.png" },
+  { key: "mamposteriaestructural", title: "Mampostería estructural",             img: "img/mamposteriaestructural.png" },
+  { key: "pavimentorigido",        title: "Pavimento rígido",                    img: "img/pavimentorigido.png" },
 ];
 
+/* ------------------ utils ------------------ */
 function useTypewriter(words) {
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
-
   useEffect(() => {
     const current = words[index];
     let i = 0;
@@ -56,10 +51,22 @@ function useTypewriter(words) {
     }, 100);
     return () => clearInterval(typing);
   }, [index, words]);
-
   return text;
 }
 
+function useIsMobile(breakpoint = 1024) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < breakpoint : true
+  );
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [breakpoint]);
+  return isMobile;
+}
+
+/* ------------------ UI blocks ------------------ */
 function Section({ children, className }) {
   return <section className={className}>{children}</section>;
 }
@@ -86,10 +93,7 @@ function Hero() {
       >
         <span className="block">
           La herramienta que todo{" "}
-          <span
-            className="inline-block border-b-4"
-            style={{ borderColor: PRIMARY }}
-          >
+          <span className="inline-block border-b-4" style={{ borderColor: PRIMARY }}>
             {typed || "\u00A0"}
           </span>
         </span>
@@ -107,11 +111,11 @@ function Hero() {
   );
 }
 
-function CardSticky({ index, total, img, title, baseTitle, scrollYProgress }) {
+/* -------- Desktop: efecto “naipes” (vertical sticky, SIN tarjeta blanca) -------- */
+function CardSticky({ index, total, img, title, scrollYProgress }) {
   const ref = useRef(null);
   const inView = useInView(ref, { amount: 0.5 });
   const controls = useAnimation();
-
   useEffect(() => {
     controls.start(inView ? { scale: 1 } : { scale: 0.98 });
   }, [inView, controls]);
@@ -127,32 +131,29 @@ function CardSticky({ index, total, img, title, baseTitle, scrollYProgress }) {
 
   return (
     <article ref={ref} className="sticky top-24 lg:top-28" style={{ zIndex: index + 1 }}>
+      {/* Contenedor transparente: sin bg, sin sombra, sin borde */}
       <motion.div
         style={{ opacity, y }}
         initial={{ scale: 0.98 }}
         animate={controls}
-        className="mx-auto max-w-7xl bg-white rounded-3xl shadow-xl overflow-hidden"
+        className="mx-auto max-w-8xl"
       >
-        <div className="grid lg:grid-cols-12 gap-8 items-center p-4 lg:p-6">
-          {/* Imagen con perspectiva (no uses / inicial: usamos BASE_URL) */}
-          <div className="lg:col-span-7">
-            <div
-              className="bg-gray-100 rounded-2xl h-[56vh] lg:h-[62vh] flex items-center justify-center overflow-hidden"
-              style={{ perspective: "1000px" }}
-            >
-              <motion.img
-                src={import.meta.env.BASE_URL + img.replace(/^\//, "")}
-                alt={title}
-                className="h-full w-full object-cover"
-                style={{ rotateX, rotateY }}
-                transition={{ type: "spring", stiffness: 120, damping: 20 }}
-              />
-            </div>
+        <div className="grid lg:grid-cols-12 gap-8 items-center px-2 lg:px-4">
+          {/* Imagen grande, sin caja */}
+          <div className="lg:col-span-7" style={{ perspective: "1000px" }}>
+            <motion.img
+              src={import.meta.env.BASE_URL + img.replace(/^\//, "")}
+              alt={title}
+              className="w-full h-[68vh] lg:h-[72vh] object-contain"
+              style={{ rotateX, rotateY }}
+              transition={{ type: "spring", stiffness: 120, damping: 20 }}
+            />
           </div>
-
           {/* Texto */}
           <div className="lg:col-span-5 px-2 lg:px-6">
-            <h4 className="text-sm lg:text-base text-gray-600">{baseTitle}</h4>
+            <h4 className="text-sm lg:text-base text-gray-600">
+              Calcula al instante los materiales que necesitas para:
+            </h4>
             <h3 className="text-2xl lg:text-4xl font-extrabold mt-2" style={{ color: PRIMARY }}>
               {title}
             </h3>
@@ -163,8 +164,7 @@ function CardSticky({ index, total, img, title, baseTitle, scrollYProgress }) {
   );
 }
 
-function CardsWow() {
-  const baseTitle = "Calcula al instante los materiales que necesitas para:";
+function CardsDesktop() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -172,33 +172,123 @@ function CardsWow() {
   });
 
   return (
+    <div ref={containerRef} className="relative" style={{ height: `${CARDS.length * 100}vh` }}>
+      {CARDS.map((c, i) => (
+        <CardSticky
+          key={c.key}
+          index={i}
+          total={CARDS.length}
+          img={c.img}
+          title={c.title}
+          scrollYProgress={scrollYProgress}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* -------- Mobile: carrusel swipe (sin tarjeta blanca) -------- */
+function CardsMobile() {
+  const [active, setActive] = useState(0);
+  const scrollerRef = useRef(null);
+
+  const goTo = (idx) => {
+    const el = scrollerRef.current?.children[idx];
+    if (el && "scrollIntoView" in el) el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    setActive(idx);
+  };
+
+  return (
+    <div className="relative">
+      {/* Flechas opcionales (se esconden en pantallas muy pequeñas) */}
+      <button
+        onClick={() => goTo(Math.max(0, active - 1))}
+        className="hidden xs:block absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 border rounded-md shadow px-3 py-2"
+        aria-label="Anterior"
+      >
+        ‹
+      </button>
+      <button
+        onClick={() => goTo(Math.min(CARDS.length - 1, active + 1))}
+        className="hidden xs:block absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 border rounded-md shadow px-3 py-2"
+        aria-label="Siguiente"
+      >
+        ›
+      </button>
+
+      <div
+        ref={scrollerRef}
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 no-scrollbar"
+        onScroll={(e) => {
+          const children = Array.from(e.currentTarget.children);
+          const center = e.currentTarget.scrollLeft + e.currentTarget.clientWidth / 2;
+          const idx = children.findIndex((ch) => {
+            const left = ch.offsetLeft;
+            const right = left + ch.clientWidth;
+            return left <= center && right >= center;
+          });
+          if (idx >= 0) setActive(idx);
+        }}
+      >
+        {CARDS.map((c) => (
+          <motion.div
+            key={c.key}
+            className="snap-center shrink-0 w-[88vw] overflow-visible"
+            initial={{ opacity: 0.85, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ type: "spring", stiffness: 120, damping: 18 }}
+          >
+            <div className="p-2">
+              <div className="w-full h-[32vh] sm:h-[36vh] md:h-[44vh] flex items-center justify-center">
+                <img
+                  src={import.meta.env.BASE_URL + c.img.replace(/^\//, "")}
+                  alt={c.title}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="mt-3">
+                <h4 className="text-sm text-gray-600">
+                  Calcula al instante los materiales que necesitas para:
+                </h4>
+                <h3 className="text-2xl font-extrabold mt-1" style={{ color: PRIMARY }}>
+                  {c.title}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Paginadores */}
+      <div className="flex justify-center gap-2 mt-2">
+        {CARDS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`h-2 w-2 rounded-full ${i === active ? "bg-green-700 scale-110" : "bg-gray-300"}`}
+            aria-label={`Ir a tarjeta ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* -------- Wrapper que decide según viewport -------- */
+function CardsWow() {
+  const isMobile = useIsMobile(1024);
+  return (
     <Section className="mt-10 px-4 lg:px-8">
       <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: PRIMARY }}>
         Lo que calcula
       </h2>
-
-      {/* Contenedor de altura N * 100vh. No tiene su propio scroll. */}
-      <div
-        ref={containerRef}
-        className="relative"
-        style={{ height: `${CARDS.length * 100}vh` }}
-      >
-        {CARDS.map((c, i) => (
-          <CardSticky
-            key={c.key}
-            index={i}
-            total={CARDS.length}
-            img={c.img}
-            title={c.title}
-            baseTitle={baseTitle}
-            scrollYProgress={scrollYProgress}
-          />
-        ))}
-      </div>
+      {isMobile ? <CardsMobile /> : <CardsDesktop />}
     </Section>
   );
 }
 
+/* -------- resto de secciones -------- */
 function Materials() {
   return (
     <Section className="py-16 text-center px-4">
@@ -209,21 +299,7 @@ function Materials() {
         No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o kilos de acero necesitas. Es como tener los materiales en la mano antes de comprarlos.
       </p>
       <div className="flex justify-center gap-6">
-        <img
-          src="/img/landing/material-cemento.png"
-          alt="cemento"
-          className="w-24 h-24 object-contain"
-        />
-        <img
-          src="/img/landing/material-arena.png"
-          alt="arena"
-          className="w-24 h-24 object-contain"
-        />
-        <img
-          src="/img/landing/material-acero.png"
-          alt="acero"
-          className="w-24 h-24 object-contain"
-        />
+        <img src="/img/materiales.png" alt="cemento" className="w-300 h-300 object-contain" />
       </div>
       <p className="mt-4 text-sm">Ejemplo: 8 bultos de 50 kg · 1.20 m³ de arena · 0.80 m³ de gravilla</p>
     </Section>
@@ -233,20 +309,14 @@ function Materials() {
 function Pricing() {
   return (
     <Section className="py-16 text-center px-4">
-      <h2 className="text-3xl font-bold mb-8" style={{ color: PRIMARY }}>
-        Precios
-      </h2>
+      <h2 className="text-3xl font-bold mb-8" style={{ color: PRIMARY }}>Precios</h2>
       <div className="flex flex-col lg:flex-row justify-center gap-8">
         <div className="bg-white rounded-3xl shadow-lg p-8 w-64 mx-auto">
-          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>
-            $20.000
-          </p>
+          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>$20.000</p>
           <p>Mensuales</p>
         </div>
         <div className="bg-white rounded-3xl shadow-lg p-8 w-64 mx-auto">
-          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>
-            165.000
-          </p>
+          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>165.000</p>
           <p>Un solo pago</p>
         </div>
       </div>
@@ -291,4 +361,3 @@ export default function Landing() {
     </div>
   );
 }
-
