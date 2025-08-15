@@ -307,20 +307,10 @@ function MaterialsAndPricing() {
       <div className="mt-6 flex items-center justify-center">
         {/* En desktop 3 ítems alineados; en móvil caben uno al lado de otro con wrap */}
         <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-10">
-          <img
-            src={base + "img/landing/material-cemento.png"}
-            alt="Cemento"
-            className="h-[82px] sm:h-[92px] md:h-[110px] object-contain"
-          />
-          <img
-            src={base + "img/landing/material-arena.png"}
-            alt="Arena/Gravilla"
-            className="h-[78px] sm:h-[88px] md:h-[100px] object-contain"
-          />
-          <img
-            src={base + "img/landing/material-acero.png"}
+                    <img
+            src={base + "img/materiales.png"}
             alt="Acero"
-            className="h-[82px] sm:h-[92px] md:h-[110px] object-contain"
+            className="h-[302px] sm:h-[302px] md:h-[310px] object-contain"
           />
         </div>
       </div>
@@ -330,12 +320,15 @@ function MaterialsAndPricing() {
         {/* Precio izquierda */}
         <div className="text-center pr-6">
           <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$20.000</div>
-          <div className="text-[14px] text-gray-700 mt-1">Mensuales</div>
+          <div className="text-[14px] text-gray-700 mt-1 ">Suscripción Mensual</div>
+             <p className="text-[15px] text-gray-800">
+          <span className="font-medium">Cancela cuando quieras</span> 
+        </p>
         </div>
 
         {/* Precio derecha con borde izquierdo para separar */}
         <div className="text-center pl-6 border-l border-gray-300">
-          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">165.000</div>
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$165.000</div>
           <div className="text-[14px] text-gray-700 mt-1">Un solo pago</div>
         </div>
       </div>
@@ -355,26 +348,13 @@ function MaterialsAndPricing() {
         <p className="text-[15px] text-gray-800">
           <span className="font-medium">Creación de un consolidado</span> parecido a un presupuesto (con materiales completos)
         </p>
+     
       </div>
     </section>
   );
 }
 
-function Features() {
-  return (
-    <Section className="py-16 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8" style={{ color: PRIMARY }}>
-        Funciones clave
-      </h2>
-      <ul className="max-w-xl mx-auto space-y-4 list-disc list-inside">
-        <li>Exporta cálculos a PDF organizados por ítem.</li>
-        <li>Consolidado de múltiples cálculos (como presupuesto) con cantidades exactas.</li>
-        <li>Accesible desde computador y celular.</li>
-        <li>Interfaz intuitiva y lista para usar.</li>
-      </ul>
-    </Section>
-  );
-}
+
 
 function FinalCTA() {
   return (
@@ -390,7 +370,7 @@ export default function Landing() {
       <Hero />
       <CardsWow />
       <MaterialsAndPricing />
-      <Features />
+     
       <FinalCTA />
     </div>
   );
