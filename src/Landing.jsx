@@ -1,17 +1,33 @@
 import { useEffect, useState, useRef } from "react";
-import { motion as Motion, useInView, useAnimation } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useInView,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+
+const Motion = motion;
 
 const PRIMARY = "#055a27";
 const ROLES = ["Ingeniero", "Arquitecto", "Maestro de obra"];
 
 const CARDS = [
-  { key: "cubiertas", title: "Cubiertas (fibrocemento, UPVC, sándwich, standing, zinc)", img: "img/cubiertas.png" },
-  { key: "concreto", title: "Concreto", img: "img/concreto.png" },
-  { key: "ciclopeo", title: "Ciclópeo", img: "img/ciclopeo.png" },
-  { key: "pavimento", title: "Pavimento rígido", img: "img/pavimento.png" },
-  { key: "muros", title: "Mampostería estructural y Muros", img: "img/muros.png" },
-  { key: "drywall", title: "Drywall y Cielo raso", img: "img/drywall.png" },
-  { key: "pisos", title: "Pisos: porcelanato, cerámica, pulidos", img: "img/pisos.png" },
+  {
+    key: "cubiertas",
+    title: "Cubiertas (fibrocemento, UPVC, sándwich, standing, zinc)",
+    img: "img/landing/cubiertas.png",
+  },
+  { key: "concreto", title: "Concreto", img: "img/landing/concreto.png" },
+  { key: "ciclopeo", title: "Ciclópeo", img: "img/landing/ciclopeo.png" },
+  { key: "pavimento", title: "Pavimento rígido", img: "img/landing/pavimento.png" },
+  { key: "muros", title: "Mampostería estructural y Muros", img: "img/landing/muros.png" },
+  { key: "drywall", title: "Drywall y Cielo raso", img: "img/landing/drywall.png" },
+  {
+    key: "pisos",
+    title: "Pisos: porcelanato, cerámica, pulidos",
+    img: "img/landing/pisos.png",
+  },
 ];
 
 function useTypewriter(words) {
@@ -91,76 +107,91 @@ function Hero() {
   );
 }
 
-function CardItem({ title, img, baseTitle }) {
+function CardSticky({ index, total, img, title, baseTitle, scrollYProgress }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { margin: "-20% 0px -20% 0px", amount: 0.5 });
+  const inView = useInView(ref, { amount: 0.5 });
   const controls = useAnimation();
 
   useEffect(() => {
-    controls.start(
-      inView
-        ? { opacity: 1, y: 0, scale: 1 }
-        : { opacity: 0.8, y: 24, scale: 0.98 }
-    );
+    controls.start(inView ? { scale: 1 } : { scale: 0.98 });
   }, [inView, controls]);
 
-  return (
-    <Motion.article
-      ref={ref}
-      className="min-h-[85vh] grid lg:grid-cols-12 items-center gap-8 bg-white rounded-3xl shadow-xl overflow-hidden"
-      initial={{ opacity: 0.8, y: 24, scale: 0.98 }}
-      animate={controls}
-      transition={{ type: "spring", stiffness: 120, damping: 20 }}
-    >
-      <div className="lg:col-span-7 h-full w-full p-4 lg:p-6">
-        <div
-          className="h-full w-full bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden"
-          style={{ perspective: "1000px" }}
-        >
-          <Motion.img
-            src={import.meta.env.BASE_URL + img.replace(/^\//, "")}
-            alt={title}
-            className="h-full w-full object-cover will-change-transform"
-            initial={{ rotateY: -14, rotateX: 8, rotateZ: 0, scale: 1.02 }}
-            whileInView={{ rotateY: -10, rotateX: 6, rotateZ: 0, scale: 1 }}
-            viewport={{ amount: 0.6, once: false }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          />
-        </div>
-      </div>
+  const start = index / total;
+  const mid = start + (1 / total) * 0.35;
+  const end = (index + 1) / total;
 
-      <div className="lg:col-span-5 px-6 lg:px-8 py-8">
-        <h4 className="text-sm lg:text-base text-gray-600">{baseTitle}</h4>
-        <h3
-          className="text-2xl lg:text-4xl font-extrabold mt-2"
-          style={{ color: PRIMARY }}
-        >
-          {title}
-        </h3>
-      </div>
-    </Motion.article>
+  const opacity = useTransform(scrollYProgress, [start, mid, end], [0, 1, 0]);
+  const y = useTransform(scrollYProgress, [start, mid, end], [40, 0, -40]);
+  const rotateX = useTransform(scrollYProgress, [start, mid, end], [10, 6, -4]);
+  const rotateY = useTransform(scrollYProgress, [start, mid, end], [-12, -8, 0]);
+
+  return (
+    <article ref={ref} className="sticky top-24 lg:top-28" style={{ zIndex: index + 1 }}>
+      <motion.div
+        style={{ opacity, y }}
+        initial={{ scale: 0.98 }}
+        animate={controls}
+        className="mx-auto max-w-7xl bg-white rounded-3xl shadow-xl overflow-hidden"
+      >
+        <div className="grid lg:grid-cols-12 gap-8 items-center p-4 lg:p-6">
+          {/* Imagen con perspectiva (no uses / inicial: usamos BASE_URL) */}
+          <div className="lg:col-span-7">
+            <div
+              className="bg-gray-100 rounded-2xl h-[56vh] lg:h-[62vh] flex items-center justify-center overflow-hidden"
+              style={{ perspective: "1000px" }}
+            >
+              <motion.img
+                src={import.meta.env.BASE_URL + img.replace(/^\//, "")}
+                alt={title}
+                className="h-full w-full object-cover"
+                style={{ rotateX, rotateY }}
+                transition={{ type: "spring", stiffness: 120, damping: 20 }}
+              />
+            </div>
+          </div>
+
+          {/* Texto */}
+          <div className="lg:col-span-5 px-2 lg:px-6">
+            <h4 className="text-sm lg:text-base text-gray-600">{baseTitle}</h4>
+            <h3 className="text-2xl lg:text-4xl font-extrabold mt-2" style={{ color: PRIMARY }}>
+              {title}
+            </h3>
+          </div>
+        </div>
+      </motion.div>
+    </article>
   );
 }
 
 function CardsWow() {
   const baseTitle = "Calcula al instante los materiales que necesitas para:";
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
 
   return (
-    <Section className="mt-8 px-4 lg:px-8">
-      <h2
-        className="text-3xl font-bold mb-6 text-center"
-        style={{ color: PRIMARY }}
-      >
+    <Section className="mt-10 px-4 lg:px-8">
+      <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: PRIMARY }}>
         Lo que calcula
       </h2>
 
-      <div className="max-w-7xl mx-auto flex flex-col gap-16">
-        {CARDS.map((c) => (
-          <CardItem
+      {/* Contenedor de altura N * 100vh. No tiene su propio scroll. */}
+      <div
+        ref={containerRef}
+        className="relative"
+        style={{ height: `${CARDS.length * 100}vh` }}
+      >
+        {CARDS.map((c, i) => (
+          <CardSticky
             key={c.key}
-            title={c.title}
+            index={i}
+            total={CARDS.length}
             img={c.img}
+            title={c.title}
             baseTitle={baseTitle}
+            scrollYProgress={scrollYProgress}
           />
         ))}
       </div>
