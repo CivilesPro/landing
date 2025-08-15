@@ -87,10 +87,10 @@ function Hero() {
   const typed = useTypewriter(ROLES);
   return (
     <Section className="flex flex-col items-center pt-16 lg:pt-24 px-4">
-        <h1
-          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center leading-tight"
-          style={{ color: PRIMARY }}
-        >
+      <h1
+        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center leading-tight"
+        style={{ color: PRIMARY }}
+      >
         <span className="block">
           La herramienta que todo{" "}
           <span className="inline-block border-b-4" style={{ borderColor: PRIMARY }}>
@@ -152,7 +152,7 @@ function CardSticky({ index, total, img, title, scrollYProgress }) {
           {/* Texto */}
           <div className="lg:col-span-5 px-2 lg:px-6">
             <h4 className="text-sm lg:text-base text-gray-600">
-              Calcula al instante los materiales que necesitas para:
+              Lista de materiales que necesitas para:
             </h4>
             <h3 className="text-2xl lg:text-4xl font-extrabold mt-2" style={{ color: PRIMARY }}>
               {title}
@@ -281,21 +281,41 @@ function CardsWow() {
   return (
     <Section className="mt-10 px-4 lg:px-8">
       <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: PRIMARY }}>
-        Lo que calcula
+        Calcula al instante:
       </h2>
       {isMobile ? <CardsMobile /> : <CardsDesktop />}
     </Section>
   );
 }
 
-/* -------- resto de secciones -------- */
+/* -------- componentes auxiliares -------- */
+function CheckLine({ children }) {
+  return (
+    <li className="flex items-start gap-2 text-[15px] text-gray-800">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mt-0.5 h-4 w-4 flex-none"
+        viewBox="0 0 20 20"
+        fill={PRIMARY}
+      >
+        <path
+          fillRule="evenodd"
+          d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414l2.293 2.293 6.543-6.543a1 1 0 011.414 0z"
+          clipRule="evenodd"
+        />
+      </svg>
+      <span>{children}</span>
+    </li>
+  );
+}
 
+/* -------- sección Materiales + Comparación de precios -------- */
 function MaterialsAndPricing() {
   const base = import.meta.env.BASE_URL;
 
   return (
     <section className="px-4 py-16">
-      {/* Texto superior (dos líneas) */}
+      {/* Texto superior */}
       <div className="max-w-3xl mx-auto text-center">
         <p className="text-[18px] leading-7 text-gray-800">
           No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o
@@ -305,56 +325,83 @@ function MaterialsAndPricing() {
 
       {/* Imagen de materiales sin fondo */}
       <div className="mt-6 flex items-center justify-center">
-        {/* En desktop 3 ítems alineados; en móvil caben uno al lado de otro con wrap */}
-        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-10">
-                    <img
-            src={base + "img/materiales.png"}
-            alt="Acero"
-            className="h-[302px] sm:h-[302px] md:h-[310px] object-contain"
-          />
+        <img
+          src={base + "img/materiales.png"}
+          alt="Materiales (cemento, arena, gravilla, acero, etc.)"
+          className="h-[300px] sm:h-[300px] md:h-[320px] object-contain"
+        />
+      </div>
+
+      {/* Comparación de planes con separador ABSOLUTO */}
+      <div className="relative mt-8 max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+        {/* Separador vertical solo en desktop (absoluto, no afecta el grid) */}
+        <div
+          className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gray-300"
+          aria-hidden="true"
+        />
+
+        {/* Plan Suscripción Mensual */}
+        <div className="text-center md:text-left">
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight" style={{ color: PRIMARY }}>
+            $20.000
+          </div>
+          <div className="text-[14px] text-gray-700 mt-1">Suscripción Mensual</div>
+
+          <ul className="mt-4 space-y-2">
+            <CheckLine>Compatible con Mac.</CheckLine>
+            <CheckLine>Más herramientas.</CheckLine>
+            <CheckLine>No requiere Excel.</CheckLine>
+            <CheckLine>Exporta consolidado en Excel.</CheckLine>
+            <CheckLine>Soporte 24/7.</CheckLine>
+          </ul>
+
+          <div className="mt-5">
+            <a
+              href="/suscripcion"
+              className="inline-block px-6 py-3 rounded-md font-semibold text-white"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              Suscríbete
+            </a>
+          </div>
+        </div>
+
+        {/* Plan Único pago */}
+        <div className="text-center md:text-left">
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight" style={{ color: PRIMARY }}>
+            $165.000
+          </div>
+          <div className="text-[14px] text-gray-700 mt-1">Único pago</div>
+
+          <ul className="mt-4 space-y-2">
+            <CheckLine>Descarga el archivo.</CheckLine>
+            <CheckLine>Disponible sin internet.</CheckLine>
+            <CheckLine>Soporte Preferencial.</CheckLine>
+            <CheckLine>Requiere Excel 2024.</CheckLine>
+            <CheckLine>Dos licencias.</CheckLine>
+          </ul>
+
+          <div className="mt-5">
+            <a
+              href="/comprar"
+              className="inline-block px-6 py-3 rounded-md font-semibold text-white"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              Comprar / Descargar
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* PRECIOS con divisor vertical al centro */}
-      <div className="mt-6 max-w-3xl mx-auto grid grid-cols-2 items-start">
-        {/* Precio izquierda */}
-        <div className="text-center pr-6">
-          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$20.000</div>
-          <div className="text-[14px] text-gray-700 mt-1 ">Suscripción Mensual</div>
-             <p className="text-[15px] text-gray-800">
-          <span className="font-medium">Cancela cuando quieras</span> 
-        </p>
-        </div>
-
-        {/* Precio derecha con borde izquierdo para separar */}
-        <div className="text-center pl-6 border-l border-gray-300">
-          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$165.000</div>
-          <div className="text-[14px] text-gray-700 mt-1">Un solo pago</div>
-        </div>
-      </div>
-
-      {/* Texto pequeño bajo los precios */}
-      <div className="max-w-3xl mx-auto text-center mt-4">
+      {/* Nota final */}
+      <div className="max-w-3xl mx-auto text-center mt-8">
         <p className="text-[14px] text-gray-700">
-          Las dos opciones incluyen lo mismo. Elige la que prefieras. Sin restricciones.
+          <span className="font-medium">Ambas incluyen Tutorial.</span> Elige la que prefieras. Sin restricciones.
         </p>
-      </div>
-
-      {/* Líneas finales (como en la maqueta) */}
-      <div className="max-w-3xl mx-auto text-center mt-8 space-y-3">
-        <p className="text-[15px] text-gray-800">
-          <span className="font-medium">Exporta cálculos</span> a PDF organizados por ítem
-        </p>
-        <p className="text-[15px] text-gray-800">
-          <span className="font-medium">Creación de un consolidado</span> parecido a un presupuesto (con materiales completos)
-        </p>
-     
       </div>
     </section>
   );
 }
-
-
 
 function FinalCTA() {
   return (
@@ -370,7 +417,6 @@ export default function Landing() {
       <Hero />
       <CardsWow />
       <MaterialsAndPricing />
-     
       <FinalCTA />
     </div>
   );
