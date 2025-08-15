@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import {
-  motion,
+  motion as Motion,
   useAnimation,
   useInView,
   useScroll,
@@ -87,10 +87,10 @@ function Hero() {
   const typed = useTypewriter(ROLES);
   return (
     <Section className="flex flex-col items-center pt-16 lg:pt-24 px-4">
-      <h1
-        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center leading-tight"
-        style={{ color: PRIMARY }}
-      >
+        <h1
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center leading-tight"
+          style={{ color: PRIMARY }}
+        >
         <span className="block">
           La herramienta que todo{" "}
           <span className="inline-block border-b-4" style={{ borderColor: PRIMARY }}>
@@ -132,7 +132,7 @@ function CardSticky({ index, total, img, title, scrollYProgress }) {
   return (
     <article ref={ref} className="sticky top-24 lg:top-28" style={{ zIndex: index + 1 }}>
       {/* Contenedor transparente: sin bg, sin sombra, sin borde */}
-      <motion.div
+      <Motion.div
         style={{ opacity, y }}
         initial={{ scale: 0.98 }}
         animate={controls}
@@ -141,7 +141,7 @@ function CardSticky({ index, total, img, title, scrollYProgress }) {
         <div className="grid lg:grid-cols-12 gap-8 items-center px-2 lg:px-4">
           {/* Imagen grande, sin caja */}
           <div className="lg:col-span-7" style={{ perspective: "1000px" }}>
-            <motion.img
+            <Motion.img
               src={import.meta.env.BASE_URL + img.replace(/^\//, "")}
               alt={title}
               className="w-full h-[68vh] lg:h-[72vh] object-contain"
@@ -159,7 +159,7 @@ function CardSticky({ index, total, img, title, scrollYProgress }) {
             </h3>
           </div>
         </div>
-      </motion.div>
+      </Motion.div>
     </article>
   );
 }
@@ -231,7 +231,7 @@ function CardsMobile() {
         }}
       >
         {CARDS.map((c) => (
-          <motion.div
+          <Motion.div
             key={c.key}
             className="snap-center shrink-0 w-[88vw] overflow-visible"
             initial={{ opacity: 0.85, y: 16 }}
@@ -256,7 +256,7 @@ function CardsMobile() {
                 </h3>
               </div>
             </div>
-          </motion.div>
+          </Motion.div>
         ))}
       </div>
 
@@ -289,39 +289,74 @@ function CardsWow() {
 }
 
 /* -------- resto de secciones -------- */
-function Materials() {
-  return (
-    <Section className="py-16 text-center px-4">
-      <h2 className="text-3xl font-bold mb-6" style={{ color: PRIMARY }}>
-        De lo digital a lo tangible
-      </h2>
-      <p className="max-w-2xl mx-auto mb-8">
-        No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o kilos de acero necesitas. Es como tener los materiales en la mano antes de comprarlos.
-      </p>
-      <div className="flex justify-center gap-6">
-        <img src="/img/materiales.png" alt="cemento" className="w-300 h-300 object-contain" />
-      </div>
-      <p className="mt-4 text-sm">Ejemplo: 8 bultos de 50 kg · 1.20 m³ de arena · 0.80 m³ de gravilla</p>
-    </Section>
-  );
-}
 
-function Pricing() {
+function MaterialsAndPricing() {
+  const base = import.meta.env.BASE_URL;
+
   return (
-    <Section className="py-16 text-center px-4">
-      <h2 className="text-3xl font-bold mb-8" style={{ color: PRIMARY }}>Precios</h2>
-      <div className="flex flex-col lg:flex-row justify-center gap-8">
-        <div className="bg-white rounded-3xl shadow-lg p-8 w-64 mx-auto">
-          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>$20.000</p>
-          <p>Mensuales</p>
-        </div>
-        <div className="bg-white rounded-3xl shadow-lg p-8 w-64 mx-auto">
-          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>165.000</p>
-          <p>Un solo pago</p>
+    <section className="px-4 py-16">
+      {/* Texto superior (dos líneas) */}
+      <div className="max-w-3xl mx-auto text-center">
+        <p className="text-[18px] leading-7 text-gray-800">
+          No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o
+          kilos de acero necesitas.
+        </p>
+      </div>
+
+      {/* Imagen de materiales sin fondo */}
+      <div className="mt-6 flex items-center justify-center">
+        {/* En desktop 3 ítems alineados; en móvil caben uno al lado de otro con wrap */}
+        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-10">
+          <img
+            src={base + "img/landing/material-cemento.png"}
+            alt="Cemento"
+            className="h-[82px] sm:h-[92px] md:h-[110px] object-contain"
+          />
+          <img
+            src={base + "img/landing/material-arena.png"}
+            alt="Arena/Gravilla"
+            className="h-[78px] sm:h-[88px] md:h-[100px] object-contain"
+          />
+          <img
+            src={base + "img/landing/material-acero.png"}
+            alt="Acero"
+            className="h-[82px] sm:h-[92px] md:h-[110px] object-contain"
+          />
         </div>
       </div>
-      <p className="mt-4">Las dos opciones incluyen lo mismo. Elige la que prefieras. Sin restricciones.</p>
-    </Section>
+
+      {/* PRECIOS con divisor vertical al centro */}
+      <div className="mt-6 max-w-3xl mx-auto grid grid-cols-2 items-start">
+        {/* Precio izquierda */}
+        <div className="text-center pr-6">
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$20.000</div>
+          <div className="text-[14px] text-gray-700 mt-1">Mensuales</div>
+        </div>
+
+        {/* Precio derecha con borde izquierdo para separar */}
+        <div className="text-center pl-6 border-l border-gray-300">
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">165.000</div>
+          <div className="text-[14px] text-gray-700 mt-1">Un solo pago</div>
+        </div>
+      </div>
+
+      {/* Texto pequeño bajo los precios */}
+      <div className="max-w-3xl mx-auto text-center mt-4">
+        <p className="text-[14px] text-gray-700">
+          Las dos opciones incluyen lo mismo. Elige la que prefieras. Sin restricciones.
+        </p>
+      </div>
+
+      {/* Líneas finales (como en la maqueta) */}
+      <div className="max-w-3xl mx-auto text-center mt-8 space-y-3">
+        <p className="text-[15px] text-gray-800">
+          <span className="font-medium">Exporta cálculos</span> a PDF organizados por ítem
+        </p>
+        <p className="text-[15px] text-gray-800">
+          <span className="font-medium">Creación de un consolidado</span> parecido a un presupuesto (con materiales completos)
+        </p>
+      </div>
+    </section>
   );
 }
 
@@ -354,8 +389,7 @@ export default function Landing() {
     <div className="font-sans">
       <Hero />
       <CardsWow />
-      <Materials />
-      <Pricing />
+      <MaterialsAndPricing />
       <Features />
       <FinalCTA />
     </div>
