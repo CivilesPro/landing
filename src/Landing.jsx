@@ -10,19 +10,81 @@ import {
 const PRIMARY = "#055a27";
 const ROLES = ["Ingeniero", "Arquitecto", "Maestro de obra"];
 
-/** Imágenes en public/img/*.png (sin slash inicial; se concatena BASE_URL) */
+/** Tarjetas: imagen + título + texto persuasivo por herramienta */
 const CARDS = [
-  { key: "fibrocemento",           title: "Fibrocemento (Cubiertas)",            img: "img/fibrocemento.png" },
-  { key: "ceramica",               title: "Cerámica (Pisos)",                    img: "img/ceramica.png" },
-  { key: "bordillos",              title: "Bordillos",                           img: "img/bordillos.png" },
-  { key: "cielorazoendrywall",     title: "Cielo raso y Drywall",                img: "img/cielorazoendrywall.png" },
-  { key: "marmol",                 title: "Mármol (Pisos)",                      img: "img/marmol.png" },
-  { key: "yeso",                   title: "Yeso (Acabados)",                     img: "img/yeso.png" },
-  { key: "steeldeck",              title: "SteelDeck / Losacero",                img: "img/steeldeck.png" },
-  { key: "pintura",                title: "Pintura (Acabados)",                  img: "img/pintura.png" },
-  { key: "granito",                title: "Granito (Pisos)",                     img: "img/granito.png" },
-  { key: "mamposteriaestructural", title: "Mampostería estructural",             img: "img/mamposteriaestructural.png" },
-  { key: "pavimentorigido",        title: "Pavimento rígido",                    img: "img/pavimentorigido.png" },
+  {
+    key: "fibrocemento",
+    title: "Fibrocemento (Cubiertas)",
+    img: "img/fibrocemento.png",
+    desc:
+      "Las tejas no se calculan solo por área: traslapos, pendientes y cortes cambian el número real. Aquí obtienes la cantidad exacta y evitas compras innecesarias. <br> Tenemos mas de 25 herramientas en total.",
+  },
+  {
+    key: "ceramica",
+    title: "Cerámica (Pisos)",
+    img: "img/ceramica.png",
+    desc:"El rendimiento varía por formato, patrón y desperdicios de corte. Te entregamos cajas y adhesivo precisos para cotizar o instalar sin sorpresas.",
+  },
+  {
+    key: "bordillos",
+    title: "Bordillos",
+    img: "img/bordillos.png",
+    desc:"Los bordillos no solo se calculan en metros lineales. El anclaje, el desperdicio y las piezas especiales complican el cálculo. Esta herramienta te da un resultado preciso para tu presupuesto y ejecución.",
+  },
+  {
+    key: "cielorazoendrywall",
+    title: "Cielo raso y Drywall",
+    img: "img/cielorazoendrywall.png",
+    desc:"Hacer un cielo raso en drywall requiere mucho más que calcular el área. Tambien se trata de perfiles, placas, tornillos y masilla cambian según el diseño.",
+  },
+  {
+    key: "marmol",
+    title: "Mármol (Pisos)",
+    img: "img/marmol.png",
+    desc:"El mármol no admite errores: un corte mal calculado puede arruinar una pieza costosa. Nuestra herramienta calcula el área, cortes y sobrantes exactos, asegurando un presupuesto realista y sin sorpresas",
+  },
+  {
+    key: "yeso",
+    title: "Yeso (Acabados)",
+    img: "img/yeso.png",
+    desc:"Rendimiento por sustrato, número de manos y desperdicio afectan las cantidades. Obtén litros/sacos exactos y optimiza compra y tiempos.",
+  },
+  {
+    key: "steeldeck",
+    title: "SteelDeck / Losacero",
+    img: "img/steeldeck.png",
+    desc:"La losa colaborante depende de traslapos, espesores y capacidad de lámina. Procesamos todo y te entregamos concreto, acero y accesorios precisos.",
+  },
+  {
+    key: "pintura",
+    title: "Pintura (Acabados)",
+    img: "img/pintura.png",
+    desc:"No es alto × ancho: rendimiento por galón, manos y tipo de superficie cambian el cálculo. Te damos litros exactos y evitas sobrecostos.",
+  },
+  {
+    key: "granito",
+    title: "Granito (Pisos)",
+    img: "img/granito.png",
+    desc:"Piezas especiales y cortes milimétricos afectan el pedido. Calculamos cantidades reales para reducir sobrantes costosos o faltantes.",
+  },
+  {
+    key: "mamposteriaestructural",
+    title: "Mampostería estructural",
+    img: "img/mamposteriaestructural.png",
+    desc:"Bloques, mortero, refuerzos y concretos de amarre. Centraliza el cálculo y controla desperdicios en una sola salida lista para presupuesto.",
+  },
+  {
+    key: "pavimentorigido",
+    title: "Pavimento rígido",
+    img: "img/pavimentorigido.png",
+    desc:"Calcular un pavimento rígido a mano no es solo multiplicar ancho × largo × espesor. También hay que considerar la dosificación exacta, desperdicios, acero y cortes. Un error de pocos milímetros en el cálculo puede significar pérdida de dinero y retrasos en obra. Esta herramienta procesa todo en segundos, con precisión milimétrica, y te entrega una lista completa de materiales lista para comprar o incluir en tu presupuesto.",
+  },
+  {
+    key: "consolidado",
+    title: "Crea un Registro",
+    img: "img/consolidado.png",
+    desc:"Una vez tengas los cálculos listos, crea un consolidado de obra para organizar y acceder a todos tus resultados en un solo lugar. Así podrás estimar tu presupuesto de manera más precisa y tomar decisiones con datos claros.",
+  },
 ];
 
 /* ------------------ utils ------------------ */
@@ -112,7 +174,7 @@ function Hero() {
 }
 
 /* -------- Desktop: efecto “naipes” (vertical sticky, SIN tarjeta blanca) -------- */
-function CardSticky({ index, total, img, title, scrollYProgress }) {
+function CardSticky({ index, total, img, title, desc, scrollYProgress }) {
   const ref = useRef(null);
   const inView = useInView(ref, { amount: 0.5 });
   const controls = useAnimation();
@@ -131,7 +193,6 @@ function CardSticky({ index, total, img, title, scrollYProgress }) {
 
   return (
     <article ref={ref} className="sticky top-24 lg:top-28" style={{ zIndex: index + 1 }}>
-      {/* Contenedor transparente: sin bg, sin sombra, sin borde */}
       <Motion.div
         style={{ opacity, y }}
         initial={{ scale: 0.98 }}
@@ -151,12 +212,15 @@ function CardSticky({ index, total, img, title, scrollYProgress }) {
           </div>
           {/* Texto */}
           <div className="lg:col-span-5 px-2 lg:px-6">
-            <h4 className="text-sm lg:text-base text-gray-600">
-              Lista de materiales que necesitas para:
-            </h4>
+            <h4 className="text-sm lg:text-base text-gray-600">Lista de materiales que necesitas para:</h4>
             <h3 className="text-2xl lg:text-4xl font-extrabold mt-2" style={{ color: PRIMARY }}>
               {title}
             </h3>
+            {desc && (
+              <p className="mt-3 text-sm lg:text-base text-gray-700 leading-relaxed">
+                {desc}
+              </p>
+            )}
           </div>
         </div>
       </Motion.div>
@@ -180,6 +244,7 @@ function CardsDesktop() {
           total={CARDS.length}
           img={c.img}
           title={c.title}
+          desc={c.desc}
           scrollYProgress={scrollYProgress}
         />
       ))}
@@ -194,7 +259,8 @@ function CardsMobile() {
 
   const goTo = (idx) => {
     const el = scrollerRef.current?.children[idx];
-    if (el && "scrollIntoView" in el) el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    if (el && "scrollIntoView" in el)
+      el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     setActive(idx);
   };
 
@@ -248,12 +314,16 @@ function CardsMobile() {
                 />
               </div>
               <div className="mt-3">
-                <h4 className="text-sm text-gray-600">
-                  Calcula al instante los materiales que necesitas para:
-                </h4>
+                <h4 className="text-sm text-gray-600">Calcula al instante los materiales que necesitas para:</h4>
                 <h3 className="text-2xl font-extrabold mt-1" style={{ color: PRIMARY }}>
                   {c.title}
+               
                 </h3>
+                {c.desc && (
+                  <p className="mt-2 text-sm text-gray-700 text-[15px] leading-relaxed ">
+                    {c.desc}
+                  </p>
+                )}
               </div>
             </div>
           </Motion.div>
@@ -317,7 +387,7 @@ function MaterialsAndPricing() {
     <section className="px-4 py-16">
       {/* Texto superior */}
       <div className="max-w-3xl mx-auto text-center">
-        <p className="text-[18px] leading-7 text-gray-800">
+        <p className="text-3xl font-bold leading-7 text-gray-800">
           No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o
           kilos de acero necesitas.
         </p>
@@ -332,7 +402,7 @@ function MaterialsAndPricing() {
         />
       </div>
 
-      {/* Comparación de planes con separador ABSOLUTO */}
+      {/* PRECIOS centrados y balanceados */}
       <div className="relative mt-8 max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
         {/* Separador vertical solo en desktop (absoluto, no afecta el grid) */}
         <div
@@ -346,7 +416,7 @@ function MaterialsAndPricing() {
             $20.000
           </div>
           <div className="text-[14px] text-gray-700 mt-1">Suscripción Mensual</div>
-
+          <p className="text-[15px] text-gray-800 font-medium">Cancela cuando quieras</p>
           <ul className="mt-4 space-y-2">
             <CheckLine>Compatible con Mac.</CheckLine>
             <CheckLine>Más herramientas.</CheckLine>
@@ -354,7 +424,6 @@ function MaterialsAndPricing() {
             <CheckLine>Exporta consolidado en Excel.</CheckLine>
             <CheckLine>Soporte 24/7.</CheckLine>
           </ul>
-
           <div className="mt-5">
             <a
               href="/suscripcion"
@@ -371,8 +440,7 @@ function MaterialsAndPricing() {
           <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight" style={{ color: PRIMARY }}>
             $165.000
           </div>
-          <div className="text-[14px] text-gray-700 mt-1">Único pago</div>
-
+          <div className="text-[14px] text-gray-700 mt-1">Un solo pago</div>
           <ul className="mt-4 space-y-2">
             <CheckLine>Descarga el archivo.</CheckLine>
             <CheckLine>Disponible sin internet.</CheckLine>
@@ -380,7 +448,6 @@ function MaterialsAndPricing() {
             <CheckLine>Requiere Excel 2024.</CheckLine>
             <CheckLine>Dos licencias.</CheckLine>
           </ul>
-
           <div className="mt-5">
             <a
               href="/comprar"
@@ -394,9 +461,19 @@ function MaterialsAndPricing() {
       </div>
 
       {/* Nota final */}
-      <div className="max-w-3xl mx-auto text-center mt-8">
+      <div className="max-w-3xl mx-auto text-center mt-9">
         <p className="text-[14px] text-gray-700">
           <span className="font-medium">Ambas incluyen Tutorial.</span> Elige la que prefieras. Sin restricciones.
+        </p>
+      </div>
+
+      {/* Líneas finales */}
+      <div className="max-w-3xl mx-auto text-center mt-8 space-y-3">
+        <p className="text-[15px] text-gray-800 font-semibold">
+          Exporta cálculos a PDF organizados por ítem.
+        </p>
+        <p className="text-[15px] text-gray-800 font-semibold">
+          Creación de un consolidado parecido a un presupuesto (con materiales completos).
         </p>
       </div>
     </section>
