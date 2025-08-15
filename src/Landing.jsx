@@ -81,7 +81,7 @@ function Hero() {
   return (
     <Section className="flex flex-col items-center pt-16 lg:pt-24 px-4">
       <h1
-        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center leading-tight"
+        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-center leading-tight"
         style={{ color: PRIMARY }}
       >
         <span className="block">
@@ -199,59 +199,60 @@ function CardsWow() {
   );
 }
 
-function Materials() {
-  return (
-    <Section className="py-16 text-center px-4">
-      <h2 className="text-3xl font-bold mb-6" style={{ color: PRIMARY }}>
-        De lo digital a lo tangible
-      </h2>
-      <p className="max-w-2xl mx-auto mb-8">
-        No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o kilos de acero necesitas. Es como tener los materiales en la mano antes de comprarlos.
-      </p>
-      <div className="flex justify-center gap-6">
-        <img
-          src="/img/landing/material-cemento.png"
-          alt="cemento"
-          className="w-24 h-24 object-contain"
-        />
-        <img
-          src="/img/landing/material-arena.png"
-          alt="arena"
-          className="w-24 h-24 object-contain"
-        />
-        <img
-          src="/img/landing/material-acero.png"
-          alt="acero"
-          className="w-24 h-24 object-contain"
-        />
-      </div>
-      <p className="mt-4 text-sm">Ejemplo: 8 bultos de 50 kg · 1.20 m³ de arena · 0.80 m³ de gravilla</p>
-    </Section>
-  );
-}
+function MaterialsAndPricing() {
+  const base = import.meta.env.BASE_URL;
 
-function Pricing() {
   return (
-    <Section className="py-16 text-center px-4">
-      <h2 className="text-3xl font-bold mb-8" style={{ color: PRIMARY }}>
-        Precios
-      </h2>
-      <div className="flex flex-col lg:flex-row justify-center gap-8">
-        <div className="bg-white rounded-3xl shadow-lg p-8 w-64 mx-auto">
-          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>
-            $20.000
-          </p>
-          <p>Mensuales</p>
+    <section className="px-4 py-16">
+      {/* Texto superior (dos líneas) */}
+      <div className="max-w-3xl mx-auto text-center">
+        <p className="text-[18px] leading-7 text-gray-800">
+          No solo calculas… sabes exactamente cuántos bultos de cemento, metros cúbicos de arena y gravilla, o
+          kilos de acero necesitas.
+        </p>
+      </div>
+
+      {/* Imagen de materiales sin fondo */}
+      <div className="mt-6 flex items-center justify-center">
+        <img
+          src={base + "img/materiales.png"}
+          alt="Materiales"
+          className="h-[82px] sm:h-[92px] md:h-[110px] object-contain"
+        />
+      </div>
+
+      {/* PRECIOS con divisor vertical al centro */}
+      <div className="mt-6 max-w-3xl mx-auto grid grid-cols-2 items-start">
+        {/* Precio izquierda */}
+        <div className="text-center pr-6">
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$20.000</div>
+          <div className="text-[14px] text-gray-700 mt-1">Mensuales</div>
         </div>
-        <div className="bg-white rounded-3xl shadow-lg p-8 w-64 mx-auto">
-          <p className="text-4xl font-bold mb-2" style={{ color: PRIMARY }}>
-            165.000
-          </p>
-          <p>Un solo pago</p>
+
+        {/* Precio derecha con borde izquierdo para separar */}
+        <div className="text-center pl-6 border-l border-gray-300">
+          <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">165.000</div>
+          <div className="text-[14px] text-gray-700 mt-1">Un solo pago</div>
         </div>
       </div>
-      <p className="mt-4">Las dos opciones incluyen lo mismo. Elige la que prefieras. Sin restricciones.</p>
-    </Section>
+
+      {/* Texto pequeño bajo los precios */}
+      <div className="max-w-3xl mx-auto text-center mt-4">
+        <p className="text-[14px] text-gray-700">
+          Las dos opciones incluyen lo mismo. Elige la que prefieras. Sin restricciones.
+        </p>
+      </div>
+
+      {/* Líneas finales (como en la maqueta) */}
+      <div className="max-w-3xl mx-auto text-center mt-8 space-y-3">
+        <p className="text-[15px] text-gray-800">
+          <span className="font-medium">Exporta cálculos</span> a PDF organizados por ítem
+        </p>
+        <p className="text-[15px] text-gray-800">
+          <span className="font-medium">Creación de un consolidado</span> parecido a un presupuesto (con materiales completos)
+        </p>
+      </div>
+    </section>
   );
 }
 
@@ -284,8 +285,7 @@ export default function Landing() {
     <div className="font-sans">
       <Hero />
       <CardsWow />
-      <Materials />
-      <Pricing />
+      <MaterialsAndPricing />
       <Features />
       <FinalCTA />
     </div>
