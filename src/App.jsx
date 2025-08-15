@@ -68,16 +68,16 @@ function Hero() {
 }
 
 const wowCards = [
-  { title: 'Cubiertas (fibrocemento, UPVC, sándwich, standing, zinc)', img: '/img/landing/card-cubiertas.png' },
-  { title: 'Concreto', img: '/img/landing/card-concreto.png' },
-  { title: 'Ciclópeo', img: '/img/landing/card-ciclopeo.png' },
-  { title: 'Pavimento rígido', img: '/img/landing/card-pavimento.png' },
-  { title: 'Mampostería estructural y Muros de concreto', img: '/img/landing/card-muros.png' },
-  { title: 'Drywall y Cielo raso', img: '/img/landing/card-drywall.png' },
-  { title: 'Pisos (porcelanato, cerámica, pulidos)', img: '/img/landing/card-pisos.png' },
-  { title: 'Bordillos', img: '/img/landing/card-bordillos.png' },
-  { title: 'Malla electrosoldada', img: '/img/landing/card-malla.png' },
-  { title: 'Losas (concreto armado, placa fácil, losacero, aligerada)', img: '/img/landing/card-losas.png' },
+  { title: 'Cubiertas (fibrocemento, UPVC, sándwich, standing, zinc)', img: '/img/landing/cubiertas.png' },
+  { title: 'Concreto', img: '/img/landing/concreto.png' },
+  { title: 'Ciclópeo', img: '/img/landing/ciclopeo.png' },
+  { title: 'Pavimento rígido', img: '/img/landing/pavimento.png' },
+  { title: 'Mampostería estructural y Muros de concreto', img: '/img/landing/muros.png' },
+  { title: 'Drywall y Cielo raso', img: '/img/landing/drywall.png' },
+  { title: 'Pisos (porcelanato, cerámica, pulidos)', img: '/img/landing/pisos.png' },
+  { title: 'Bordillos', img: '/img/landing/bordillos.png' },
+  { title: 'Malla electrosoldada', img: '/img/landing/malla.png' },
+  { title: 'Losas (concreto armado, placa fácil, losacero, aligerada)', img: '/img/landing/losas.png' },
 ]
 
 function WowCards() {
