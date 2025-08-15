@@ -316,20 +316,32 @@ function MaterialsAndPricing() {
       </div>
 
       {/* PRECIOS con divisor vertical al centro */}
-      <div className="mt-6 max-w-3xl mx-auto grid grid-cols-2 items-start">
+      <div className="mt-6 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 text-center items-start sm:divide-x sm:divide-gray-300">
         {/* Precio izquierda */}
-        <div className="text-center pr-6">
+        <div className="flex flex-col items-center sm:px-6">
           <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$20.000</div>
-          <div className="text-[14px] text-gray-700 mt-1 ">Suscripción Mensual</div>
-             <p className="text-[15px] text-gray-800">
-          <span className="font-medium">Cancela cuando quieras</span> 
-        </p>
+          <div className="text-[14px] text-gray-700 mt-1">Suscripción Mensual</div>
+          <p className="text-[15px] text-gray-800 font-medium">Cancela cuando quieras</p>
+          <a
+            href="/dashboard"
+            className="mt-4 px-6 py-3 rounded-md font-semibold text-white"
+            style={{ backgroundColor: PRIMARY }}
+          >
+            Suscríbete
+          </a>
         </div>
 
-        {/* Precio derecha con borde izquierdo para separar */}
-        <div className="text-center pl-6 border-l border-gray-300">
+        {/* Precio derecha */}
+        <div className="flex flex-col items-center mt-6 sm:mt-0 sm:px-6">
           <div className="text-[34px] sm:text-[36px] font-extrabold tracking-tight text-primary">$165.000</div>
           <div className="text-[14px] text-gray-700 mt-1">Un solo pago</div>
+          <a
+            href="/dashboard"
+            className="mt-4 px-6 py-3 rounded-md font-semibold text-white"
+            style={{ backgroundColor: PRIMARY }}
+          >
+            Comprar / Descargar
+          </a>
         </div>
       </div>
 
@@ -340,15 +352,14 @@ function MaterialsAndPricing() {
         </p>
       </div>
 
-      {/* Líneas finales (como en la maqueta) */}
+      {/* Líneas finales */}
       <div className="max-w-3xl mx-auto text-center mt-8 space-y-3">
-        <p className="text-[15px] text-gray-800">
-          <span className="font-medium">Exporta cálculos</span> a PDF organizados por ítem
+        <p className="text-[15px] text-gray-800 font-semibold">
+          Exporta cálculos a PDF organizados por ítem.
         </p>
-        <p className="text-[15px] text-gray-800">
-          <span className="font-medium">Creación de un consolidado</span> parecido a un presupuesto (con materiales completos)
+        <p className="text-[15px] text-gray-800 font-semibold">
+          Creación de un consolidado parecido a un presupuesto (con materiales completos).
         </p>
-     
       </div>
     </section>
   );
