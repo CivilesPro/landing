@@ -17,7 +17,7 @@ const CARDS = [
     title: "Fibrocemento (Cubiertas)",
     img: "img/fibrocemento.png",
     desc:
-      "Las tejas no se calculan solo por área: traslapos, pendientes y cortes cambian el número real. Aquí obtienes la cantidad exacta y evitas compras innecesarias. <br> Tenemos mas de 25 herramientas en total.",
+      "Las tejas no se calculan solo por área: traslapos, pendientes y cortes cambian el número real. Aquí obtienes la cantidad exacta y evitas compras innecesarias. Tenemos mas de 25 herramientas en total.",
   },
   {
     key: "ceramica",
