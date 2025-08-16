@@ -6,8 +6,10 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import { FaWhatsapp } from "react-icons/fa";
 
 const PRIMARY = "#055a27";
+const SECUNDARY = "#111111ff";
 const ROLES = ["Ingenieros", "Arquitectos", "Maestros de obra"];
 
 /** Imágenes en public/img/*.png (sin slash inicial; se concatena BASE_URL) */
@@ -35,7 +37,7 @@ const CARDS = [
   },
   {
     key: "cielorazoendrywall",
-    title: "Cielo raso y Drywall",
+    title: "Cielo raso en Drywall",
     img: "img/cielorazoendrywall.png",
     desc:
       "Hacer un cielo raso en drywall requiere mucho más que calcular el área. Tambien se trata de perfiles, placas, tornillos y masilla cambian según el diseño.",
@@ -144,17 +146,24 @@ function Section({ children, className }) {
   return <section className={className}>{children}</section>;
 }
 
+
+
 function CTAButton() {
   return (
     <a
-      href="/dashboard"
-      className="px-8 py-4 rounded-md font-semibold text-white"
-      style={{ backgroundColor: PRIMARY }}
+      href="https://wa.me/573127437848"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white"
+      style={{ backgroundColor: SECUNDARY }}
     >
-      Comienza a calcular ahora
+      <FaWhatsapp size={20} />
+      Contactar a un asesor
     </a>
   );
 }
+
+
 
 function AppHeader() {
   return (
@@ -195,9 +204,9 @@ function Hero() {
       <a
         href="/dashboard"
         className="mt-6 px-6 py-3 rounded-md font-semibold text-white"
-        style={{ backgroundColor: PRIMARY }}
+        style={{ backgroundColor: SECUNDARY }}
       >
-        Comienza a calcular ahora
+        Comienza ahora
       </a>
     </Section>
   );
@@ -499,10 +508,10 @@ function MaterialsAndPricing() {
       </div>
       <div className="max-w-3xl mx-auto text-center mt-8 space-y-3">
         <p className="text-[15px] text-gray-800 font-semibold">
-          Exporta cálculos a PDF organizados por ítem.
+          Exporta cada cálculo en PDF (ordenado por ítem) para cotizar y documentar.
         </p>
         <p className="text-[15px] text-gray-800 font-semibold">
-          Creación de un consolidado parecido a un presupuesto (con materiales completos).
+          Reúne todos los materiales en un consolidado listo para presupuesto.
         </p>
       </div>
       
@@ -529,7 +538,7 @@ function SiteFooter() {
             <img
               src={import.meta.env.BASE_URL + "img/logociviles.png"}
               alt="Civiles Pro"
-              className="h-10 w-auto"
+              className="h-20 w-auto"
             />
           </div>
           <div className="md:col-span-2 text-xs opacity-90">
