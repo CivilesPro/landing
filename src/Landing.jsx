@@ -156,6 +156,25 @@ function CTAButton() {
   );
 }
 
+function AppHeader() {
+  return (
+    <header
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/20 backdrop-blur"
+      style={{ background: "rgba(5, 90, 39, 0.9)" }}
+    >
+      <div className="max-w-7xl mx-auto h-16 flex items-center px-4">
+        <a href="/" aria-label="Inicio">
+          <img
+            src={import.meta.env.BASE_URL + "img/logociviles.png"}
+            alt="Civiles Pro"
+            className="h-10 w-auto"
+          />
+        </a>
+      </div>
+    </header>
+  );
+}
+
 function Hero() {
   const typed = useTypewriter(ROLES);
   return (
@@ -499,13 +518,181 @@ function FinalCTA() {
   );
 }
 
+function SiteFooter() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="text-white" style={{ backgroundColor: PRIMARY }}>
+      <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
+        {/* Encabezado */}
+        <div className="grid gap-6 md:grid-cols-3 items-start">
+          <div>
+            <img
+              src={import.meta.env.BASE_URL + "img/logociviles.png"}
+              alt="Civiles Pro"
+              className="h-10 w-auto"
+            />
+          </div>
+          <div className="md:col-span-2 text-xs opacity-90">
+            Civiles Pro ofrece herramientas de cálculo de materiales para obra
+            civil. Las cantidades resultantes se generan con base en parámetros
+            técnicos y buenas prácticas de construcción, y pueden ajustarse según
+            especificaciones de proyecto. Las medidas y resultados se expresan
+            conforme a normativa vigente colombiana cuando aplica. La plataforma
+            facilita la creación de un consolidado para estimación y control; sin
+            embargo, no es un software de presupuesto ni sustituye la validación
+            técnica del profesional responsable de la obra.
+          </div>
+        </div>
+
+        {/* Cuerpo */}
+        <div className="grid gap-8 md:grid-cols-2">
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="https://civilespro.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Inicio
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://civilespro.com/concreto"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Plantilla de cálculo de concreto
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://civilespro.com/cursos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Cursos
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://civilespro.com/autocad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Recursos para Autocad
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://civilespro.com/revit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Recursos para Revit
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://civilespro.com/formaleta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Plantilla de gestión de formaleta
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://civilespro.com/almacen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block opacity-90 hover:opacity-100"
+              >
+                Plantilla de almacén
+              </a>
+            </li>
+          </ul>
+          <div className="flex gap-4">
+            <a
+              href="https://www.facebook.com/ingcivilespro"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              title="Facebook"
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-5 w-5"
+              >
+                <path d="M24 12.073C24 5.404 18.627 0 12 0 5.373 0 0 5.404 0 12.073c0 6.053 4.388 11.07 10.125 11.928v-8.432H7.078v-3.496h3.047V9.356c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.492 0-1.956.925-1.956 1.874v2.251h3.328l-.532 3.497h-2.796v8.432C19.612 23.142 24 18.125 24 12.073" />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/civilespro/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-5 w-5"
+              >
+                <path d="M12 0c3.3 0 3.7.012 5.004.072 1.206.058 2.003.25 2.48.415a4.92 4.92 0 011.8 1.17 4.92 4.92 0 011.17 1.8c.165.477.357 1.274.415 2.48C22.988 5.3 23 5.7 23 9c0 3.3-.012 3.7-.072 5.004-.058 1.206-.25 2.003-.415 2.48a4.92 4.92 0 01-1.17 1.8 4.92 4.92 0 01-1.8 1.17c-.477.165-1.274.357-2.48.415C15.7 22.988 15.3 23 12 23c-3.3 0-3.7-.012-5.004-.072-1.206-.058-2.003-.25-2.48-.415a4.92 4.92 0 01-1.8-1.17 4.92 4.92 0 01-1.17-1.8c-.165-.477-.357-1.274-.415-2.48C1.012 15.7 1 15.3 1 12c0-3.3.012-3.7.072-5.004.058-1.206.25-2.003.415-2.48a4.92 4.92 0 011.17-1.8 4.92 4.92 0 011.8-1.17c.477-.165 1.274-.357 2.48-.415C8.3 1.012 8.7 1 12 1zm0 2.163c-3.26 0-3.67.012-4.964.07-.996.046-1.54.213-1.898.356-.478.185-.82.407-1.178.765-.358.358-.58.7-.765 1.178-.143.358-.31.902-.356 1.898-.058 1.294-.07 1.704-.07 4.964s.012 3.67.07 4.964c.046.996.213 1.54.356 1.898.185.478.407.82.765 1.178.358.358.7.58 1.178.765.358.143.902.31 1.898.356 1.294.058 1.704.07 4.964.07s3.67-.012 4.964-.07c.996-.046 1.54-.213 1.898-.356a3.2 3.2 0 001.178-.765 3.2 3.2 0 00.765-1.178c.143-.358.31-.902.356-1.898.058-1.294.07-1.704.07-4.964s-.012-3.67-.07-4.964c-.046-.996-.213-1.54-.356-1.898a3.2 3.2 0 00-.765-1.178 3.2 3.2 0 00-1.178-.765c-.358-.143-.902-.31-1.898-.356-1.294-.058-1.704-.07-4.964-.07zm0 3.405a5.432 5.432 0 110 10.864 5.432 5.432 0 010-10.864zm0 8.962a3.53 3.53 0 100-7.06 3.53 3.53 0 000 7.06zm5.6-9.994a1.272 1.272 0 11-2.544 0 1.272 1.272 0 012.544 0z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.tiktok.com/@ingcivilespro"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+              title="TikTok"
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-5 w-5"
+              >
+                <path d="M12 0h4.837c.375 2.73 2.426 4.87 5.163 5.11v4.89a9.075 9.075 0 01-4.812-1.318v8.306a6.93 6.93 0 11-6.93-6.928c.45 0 .885.046 1.309.126V5.105H12V0zm1.309 13.61a2.437 2.437 0 00-1.309-.365 2.485 2.485 0 102.485 2.485v-6.199a9.088 9.088 0 004.812 1.319V8.184a5.127 5.127 0 01-4.812-5.059H13.31v10.485z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Pie */}
+        <div className="pt-8 mt-8 border-t border-white/20 text-xs text-center">
+          © {year} Civiles Pro. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function Landing() {
   return (
     <div className="font-sans">
-      <Hero />
-      <CardsWow />
-      <MaterialsAndPricing />
-      <FinalCTA />
+      <AppHeader />
+      <div className="pt-20 lg:pt-24">
+        <Hero />
+        <CardsWow />
+        <MaterialsAndPricing />
+        <FinalCTA />
+        <SiteFooter />
+      </div>
     </div>
   );
 }
