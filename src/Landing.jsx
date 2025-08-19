@@ -16,11 +16,19 @@ const ROLES = ["Ingenieros", "Arquitectos", "Maestros de obra"];
 const CARDS = [
   {
     key: "Inicio",
-    title: "Escribe lo quieras Calcular",
+    title: "Calcular lo que quieras",
     img: "img/inicio.png",
     desc:
       "Comenzar a calcular es tan simple como escribir el trabajo que vas a realizar.",
   },
+{
+    key: "murodebloques",
+    title: "Bloques (Muros)",
+    img: "img/bloques.png",
+    desc:
+      "Bloques, mortero, todo dependiendo de la cara del muro. Centraliza el cálculo y controla desperdicios en una sola salida lista para presupuesto.",
+  },
+
   {
     key: "fibrocemento",
     title: "Fibrocemento (Cubiertas)",
@@ -37,7 +45,7 @@ const CARDS = [
   },
   {
     key: "bordillos",
-    title: "Bordillos",
+    title: "Bordillos(Concreto)",
     img: "img/bordillos.png",
     desc:
       "Los bordillos no solo se calculan en metros lineales. El anclaje, el desperdicio y las piezas especiales complican el cálculo. Esta herramienta te da un resultado preciso para tu presupuesto y ejecución.",
@@ -51,7 +59,7 @@ const CARDS = [
   },  
     {
     key: "steeldeck",
-    title: "SteelDeck / Losacero",
+    title: "SteelDeck (Losas)",
     img: "img/steeldeck.png",
     desc:
       "La losa colaborante depende de traslapos, espesores y capacidad de lámina. Procesamos todo y te entregamos concreto, acero y accesorios precisos.",
