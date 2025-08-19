@@ -15,6 +15,13 @@ const ROLES = ["Ingenieros", "Arquitectos", "Maestros de obra"];
 /** Imágenes en public/img/*.png (sin slash inicial; se concatena BASE_URL) */
 const CARDS = [
   {
+    key: "Inicio",
+    title: "Escribe lo quieras Calcular",
+    img: "img/inicio.png",
+    desc:
+      "Comenzar a calcular es tan simple como escribir el trabajo que vas a realizar.",
+  },
+  {
     key: "fibrocemento",
     title: "Fibrocemento (Cubiertas)",
     img: "img/fibrocemento.png",
@@ -38,25 +45,11 @@ const CARDS = [
   {
     key: "cielorazoendrywall",
     title: "Cielo raso en Drywall",
-    img: "img/cielorazoendrywall.png",
+    img: "img/cielorazo.png",
     desc:
       "Hacer un cielo raso en drywall requiere mucho más que calcular el área. Tambien se trata de perfiles, placas, tornillos y masilla cambian según el diseño.",
-  },
-  {
-    key: "marmol",
-    title: "Mármol (Pisos)",
-    img: "img/marmol.png",
-    desc:
-      "El mármol no admite errores: un corte mal calculado puede arruinar una pieza costosa. Nuestra herramienta calcula el área, cortes y sobrantes exactos, asegurando un presupuesto realista y sin sorpresas",
-  },
-  {
-    key: "yeso",
-    title: "Yeso (Acabados)",
-    img: "img/yeso.png",
-    desc:
-      "Rendimiento por sustrato, número de manos y desperdicio afectan las cantidades. Obtén litros/sacos exactos y optimiza compra y tiempos.",
-  },
-  {
+  },  
+    {
     key: "steeldeck",
     title: "SteelDeck / Losacero",
     img: "img/steeldeck.png",
@@ -90,6 +83,13 @@ const CARDS = [
     img: "img/pavimentorigido.png",
     desc:
       "Calcular un pavimento rígido a mano no es solo multiplicar ancho × largo × espesor. También hay que considerar la dosificación exacta, desperdicios, acero y cortes. Un error de pocos milímetros en el cálculo puede significar pérdida de dinero y retrasos en obra. Esta herramienta procesa todo en segundos, con precisión milimétrica, y te entrega una lista completa de materiales lista para comprar o incluir en tu presupuesto.",
+  },
+  {
+    key: "pdf",
+    title: "Importa un Informe por Item",
+    img: "img/informe.png",
+    desc:
+      "Exporta un informe claro para enviarlo a comprar",
   },
   {
     key: "consolidado",
