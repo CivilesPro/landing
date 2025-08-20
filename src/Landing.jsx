@@ -473,7 +473,7 @@ function MaterialsAndPricing() {
             <CheckLine>Soporte 24/7</CheckLine>
           </ul>
           <a
-            href="/dashboard"
+            href="https://app.civilespro.com/login"
             className="mt-4 px-6 py-3 rounded-md font-semibold text-white"
             style={{ backgroundColor: PRIMARY }}
           >
