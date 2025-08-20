@@ -21,7 +21,7 @@ const CARDS = [
     desc:
       "Comenzar a calcular es tan simple como escribir el trabajo que vas a realizar.",
   },
-{
+  {
     key: "murodebloques",
     title: "Bloques (Muros)",
     img: "img/bloques.png",
@@ -57,7 +57,7 @@ const CARDS = [
     desc:
       "Hacer un cielo raso en drywall requiere mucho más que calcular el área. Tambien se trata de perfiles, placas, tornillos y masilla cambian según el diseño.",
   },  
-    {
+  {
     key: "steeldeck",
     title: "SteelDeck (Losas)",
     img: "img/steeldeck.png",
@@ -154,8 +154,6 @@ function Section({ children, className }) {
   return <section className={className}>{children}</section>;
 }
 
-
-
 function CTAButton() {
   return (
     <a
@@ -170,8 +168,6 @@ function CTAButton() {
     </a>
   );
 }
-
-
 
 function AppHeader() {
   return (
@@ -201,7 +197,7 @@ function Hero() {
         style={{ color: PRIMARY }}
       >
         <span className="block">
-          La herramienta que los {" "}
+          La herramienta que los{" "}
           <span className="inline-block border-b-4" style={{ borderColor: PRIMARY }}>
             {typed || "\u00A0"}
           </span>
@@ -209,8 +205,9 @@ function Hero() {
         <span className="block">necesitan para ser mas eficientes.</span>
       </h1>
 
+      {/* ⬇️ Botón ahora baja a la sección de precios */}
       <a
-        href="/dashboard"
+        href="#planes"
         className="mt-6 px-6 py-3 rounded-md font-semibold text-white"
         style={{ backgroundColor: SECUNDARY }}
       >
@@ -434,7 +431,8 @@ function MaterialsAndPricing() {
   const base = import.meta.env.BASE_URL;
 
   return (
-    <section className="px-4 py-16">
+    // ⬇️ id para el ancla y scroll-mt para compensar el header fijo
+    <section id="planes" className="px-4 py-16 scroll-mt-24">
       {/* Texto superior */}
       <div className="max-w-3xl mx-auto text-center">
         <p className="text-3xl font-bold leading-7 text-gray-800">
@@ -507,7 +505,7 @@ function MaterialsAndPricing() {
           <span className="font-medium">Ambas incluyen Tutorial.</span> Elige la que prefieras. Sin restricciones.
         </p>
       </div>
- <div className="mt-6 flex items-center justify-center">
+      <div className="mt-6 flex items-center justify-center">
         <img
           src={base + "img/mediosdepago.png"}
           alt="Materiales (cemento, arena, gravilla, acero, etc.)"
@@ -667,7 +665,7 @@ function SiteFooter() {
                 fill="currentColor"
                 className="h-5 w-5"
               >
-                <path d="M12 0c3.3 0 3.7.012 5.004.072 1.206.058 2.003.25 2.48.415a4.92 4.92 0 011.8 1.17 4.92 4.92 0 011.17 1.8c.165.477.357 1.274.415 2.48C22.988 5.3 23 5.7 23 9c0 3.3-.012 3.7-.072 5.004-.058 1.206-.25 2.003-.415 2.48a4.92 4.92 0 01-1.17 1.8 4.92 4.92 0 01-1.8 1.17c-.477.165-1.274.357-2.48.415C15.7 22.988 15.3 23 12 23c-3.3 0-3.7-.012-5.004-.072-1.206-.058-2.003-.25-2.48-.415a4.92 4.92 0 01-1.8-1.17 4.92 4.92 0 01-1.17-1.8c-.165-.477-.357-1.274-.415-2.48C1.012 15.7 1 15.3 1 12c0-3.3.012-3.7.072-5.004.058-1.206.25-2.003.415-2.48a4.92 4.92 0 011.17-1.8 4.92 4.92 0 011.8-1.17c.477-.165 1.274-.357 2.48-.415C8.3 1.012 8.7 1 12 1zm0 2.163c-3.26 0-3.67.012-4.964.07-.996.046-1.54.213-1.898.356-.478.185-.82.407-1.178.765-.358.358-.58.7-.765 1.178-.143.358-.31.902-.356 1.898-.058 1.294-.07 1.704-.07 4.964s.012 3.67.07 4.964c.046.996.213 1.54.356 1.898.185.478.407.82.765 1.178.358.358.7.58 1.178.765.358.143.902.31 1.898.356 1.294.058 1.704.07 4.964.07s3.67-.012 4.964-.07c.996-.046 1.54-.213 1.898-.356a3.2 3.2 0 001.178-.765 3.2 3.2 0 00.765-1.178c.143-.358.31-.902.356-1.898.058-1.294.07-1.704.07-4.964s-.012-3.67-.07-4.964c-.046-.996-.213-1.54-.356-1.898a3.2 3.2 0 00-.765-1.178 3.2 3.2 0 00-1.178-.765c-.358-.143-.902-.31-1.898-.356-1.294-.058-1.704-.07-4.964-.07zm0 3.405a5.432 5.432 0 110 10.864 5.432 5.432 0 010-10.864zm0 8.962a3.53 3.53 0 100-7.06 3.53 3.53 0 000 7.06zm5.6-9.994a1.272 1.272 0 11-2.544 0 1.272 1.272 0 012.544 0z" />
+                <path d="M12 0c3.3 0 3.7.012 5.004.072 1.206.058 2.003.25 2.48.415a4.92 4.92 0 011.8 1.17 4.92 4.92 0 011.17 1.8c.165.477.357 1.274.415 2.48C22.988 5.3 23 5.7 23 9c0 3.3-.012 3.7-.072 5.004-.058 1.206-.25 2.003-.415 2.48a4.92 4.92 0 01-1.17 1.8 4.92 4.92 0 01-1.8 1.17c-.477.165-1.274.357-2.48.415C15.7 22.988 15.3 23 12 23c-3.3 0-3.7-.012-5.004-.072-1.206-.058-2.003-.25-2.48-.415a4.92 4.92 0 01-1.8-1.17 4.92 4.92 0 01-1.17-1.8c-.165-.477-.357-1.274-.415-2.48C1.012 15.7 1 15.3 1 12c0-3.3.012-3.7.072-5.004.058-1.206.25-2.003.415-2.48a3.2 3.2 0 00-.765-1.178 3.2 3.2 0 00-1.178-.765c-.358-.143-.902-.31-1.898-.356-1.294-.058-1.704-.07-4.964-.07zm0 2.163c-3.26 0-3.67.012-4.964.07-.996.046-1.54.213-1.898.356-.478.185-.82.407-1.178.765-.358.358-.58.7-.765 1.178-.143.358-.31.902-.356 1.898-.058 1.294-.07 1.704-.07 4.964s.012 3.67.07 4.964c.046.996.213 1.54.356 1.898.185.478.407.82.765 1.178.358.358.7.58 1.178.765.358.143.902.31 1.898.356 1.294.058 1.704.07 4.964.07s3.67-.012 4.964-.07c.996-.046 1.54-.213 1.898-.356a3.2 3.2 0 00.765-1.178 3.2 3.2 0 00.765-1.178c.143-.358.31-.902.356-1.898.058-1.294.07-1.704.07-4.964s-.012-3.67-.07-4.964c-.046-.996-.213-1.54-.356-1.898a3.2 3.2 0 00-.765-1.178 3.2 3.2 0 00-1.178-.765c-.358-.143-.902-.31-1.898-.356-1.294-.058-1.704-.07-4.964-.07zm0 3.405a5.432 5.432 0 110 10.864 5.432 5.432 0 010-10.864zm0 8.962a3.53 3.53 0 100-7.06 3.53 3.53 0 000 7.06zm5.6-9.994a1.272 1.272 0 11-2.544 0 1.272 1.272 0 012.544 0z" />
               </svg>
             </a>
             <a
@@ -701,7 +699,8 @@ function SiteFooter() {
 
 export default function Landing() {
   return (
-    <div className="font-sans">
+    // ⬇️ scroll-smooth para que el salto al ancla sea suave
+    <div className="font-sans scroll-smooth">
       <AppHeader />
       <div className="pt-20 lg:pt-24">
         <Hero />
