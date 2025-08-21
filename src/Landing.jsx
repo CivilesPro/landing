@@ -94,7 +94,7 @@ const CARDS = [
   },
   {
     key: "pdf",
-    title: "Importa un Informe por Item",
+    title: "Exporta un Informe por Item",
     img: "img/informe.png",
     desc:
       "Exporta un informe claro para enviarlo a comprar",
